@@ -20,28 +20,24 @@ public class CoursController {
     }
 
     @RequestMapping("/modules/{moduleId}/cours/{id}")
-    public Optional<Cours> getCoursById(@PathVariable Integer id){
+    public Optional<Cours> getCoursById(@PathVariable Integer id, @PathVariable Integer moduleId){
         return coursService.getCoursById(id);
     }
 
     @RequestMapping(method= RequestMethod.POST, value="/modules/{moduleId}/cours")
-    public void addCours(@PathVariable Integer moduleId , @RequestBody Cours cours){
-        Module md = new Module();
-        md.setId(moduleId);
-        cours.setModule(md);
+    public void addCours( @RequestBody Cours cours , @PathVariable Integer moduleId){
+        cours.setModule(new Module(moduleId, "",""));
         coursService.addCours(cours);
     }
 
     @RequestMapping(method= RequestMethod.PUT, value="/modules/{moduleId}/cours/{id}")
-    public void updateCours(@PathVariable Integer moduleId , @RequestBody Cours cours){
-        Module md = new Module();
-        md.setId(moduleId);
-        cours.setModule(md);
+    public void updateCours(@RequestBody Cours cours , @PathVariable Integer moduleId , @PathVariable Integer id){
+        cours.setModule(new Module(moduleId, "",""));
         coursService.updateCours(cours);
     }
 
     @RequestMapping(method= RequestMethod.DELETE, value="/modules/{moduleId}/cours/{id}")
-    public void addCours(@PathVariable Integer id){
+    public void addCours(@PathVariable Integer id, @PathVariable Integer moduleId){
         coursService.deleteCours(id);
     }
 }
