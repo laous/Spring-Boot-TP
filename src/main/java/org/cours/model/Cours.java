@@ -1,15 +1,16 @@
 package org.cours.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Cours {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private int name;
     private int description;
+
     @ManyToOne
     private Module module;
 
